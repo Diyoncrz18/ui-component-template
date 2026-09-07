@@ -1,12 +1,12 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { IconMenu2, IconX } from "@tabler/icons-react";
+import { Menu as IconMenu2, X as IconX } from "lucide-react";
 import {
     motion,
     AnimatePresence,
     useScroll,
     useMotionValueEvent,
-} from "motion/react";
+} from "framer-motion";
 
 import React, { useRef, useState } from "react";
 
@@ -57,7 +57,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
     });
     const [visible, setVisible] = useState<boolean>(false);
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
+    useMotionValueEvent(scrollY, "change", (latest: number) => {
         if (latest > 100) {
             setVisible(true);
         } else {
@@ -256,14 +256,13 @@ export const NavbarButton = ({
     ...props
 }: {
     href?: string;
-    as?: React.ElementType;
-    children: React.ReactNode;
+    as?: any;
+    children?: React.ReactNode;
     className?: string;
     variant?: "primary" | "secondary" | "dark" | "gradient";
-} & (
-        | React.ComponentPropsWithoutRef<"a">
-        | React.ComponentPropsWithoutRef<"button">
-    )) => {
+    [key: string]: any;
+}) => {
+    const Component = Tag as any;
     const baseStyles =
         "px-4 py-2 rounded-md bg-white button bg-white text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
 
@@ -277,12 +276,12 @@ export const NavbarButton = ({
     };
 
     return (
-        <Tag
+        <Component
             href={href || undefined}
             className={cn(baseStyles, variantStyles[variant], className)}
             {...props}
         >
             {children}
-        </Tag>
+        </Component>
     );
 };

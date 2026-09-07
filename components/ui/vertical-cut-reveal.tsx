@@ -7,11 +7,17 @@ interface VerticalCutRevealProps {
   splitBy?: string;
   staggerDuration?: number;
   staggerFrom?: string;
+  transition?: any;
+  containerClassName?: string;
+  [key: string]: any;
 }
 
 export const VerticalCutReveal = ({
   children,
   className,
+  containerClassName,
+  ...props
 }: VerticalCutRevealProps) => {
-  return <div className={className}>{children}</div>;
+  return <div className={containerClassName || className} {...props}>{children}</div>;
 };
+

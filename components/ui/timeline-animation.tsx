@@ -17,6 +17,6 @@ export const TimelineContent = ({
   className,
   style,
 }: TimelineContentProps) => {
-  const El = Component as React.ElementType;
+  const El = Component as any;
   return <El className={className} style={style}>{children}</El>;
 };
